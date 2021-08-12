@@ -27,5 +27,9 @@
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
+
+        <server name="CLOUDSTACK_ENDPOINT" value="http://localhost:8080/client"/>
+        <server name="CLOUDSTACK_KEY" value="some-random-key"/>
+        <server name="CLOUDSTACK_SECRET" value="some-random-secret"/>
     </php>
 </phpunit>

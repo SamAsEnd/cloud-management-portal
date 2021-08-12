@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'cloudstack' => [
+        'endpoint' => env('CLOUDSTACK_ENDPOINT'),
+        'key' => env('CLOUDSTACK_KEY'),
+        'secret' => env('CLOUDSTACK_SECRET'),
+    ],
 ];
