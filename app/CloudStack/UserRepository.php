@@ -2,17 +2,8 @@
 
 namespace App\CloudStack;
 
-/**
- * @method listUsers(array $parameters)
- * @method createUser(array $parameters)
- * @method getUser(array $parameters)
- * @method lockUser(array $parameters)
- * @method disableUser(array $parameters)
- * @method updateUser(array $parameters)
- * @method deleteUser(array $parameters)
- *
- * @see https://cloudstack.apache.org/api/apidocs-4.15/
- */
+use Illuminate\Support\Collection;
+
 class UserRepository
 {
     protected Client $client;
@@ -22,8 +13,37 @@ class UserRepository
         $this->client = $client;
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @throws \Illuminate\Http\Client\RequestException
+     */
+    public function listUsers(array $parameters = []): Collection
     {
-        return $this->client->exec($name, [...$arguments])->json();
+        $result = $this->client->exec('listUsers', $parameters)->json();
+
+        return collect($result['listusersresponse']['user'] ?? []);
+    }
+
+    /**
+     * @throws \Illuminate\Http\Client\RequestException
+     */
+    public function getUser(array $parameters = []): array
+    {
+        return $this->client->exec('getUser', $parameters)->json();
+    }
+
+    /**
+     * @throws \Illuminate\Http\Client\RequestException
+     */
+    public function createUser(array $parameters = []): array
+    {
+        return $this->client->exec('createUser', $parameters)->json();
+    }
+
+    /**
+     * @throws \Illuminate\Http\Client\RequestException
+     */
+    public function deleteUser(array $parameters = []): array
+    {
+        return $this->client->exec('deleteUser', $parameters)->json();
     }
 }
