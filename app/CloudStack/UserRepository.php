@@ -34,16 +34,20 @@ class UserRepository
     /**
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public function createUser(array $parameters = []): array
+    public function createUser(array $parameters = []): Collection
     {
-        return $this->client->exec('createUser', $parameters)->json();
+        $result = $this->client->exec('createUser', $parameters)->json();
+
+        return collect($result['createuserresponse']['user'] ?? []);
     }
 
     /**
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public function deleteUser(array $parameters = []): array
+    public function deleteUser(array $parameters = []): bool
     {
-        return $this->client->exec('deleteUser', $parameters)->json();
+        $result = $this->client->exec('deleteUser', $parameters)->json();
+
+        return $result['deleteuserresponse']['success'] ?? false;
     }
 }

@@ -16,7 +16,7 @@ Artisan::command('stack:create-user {firstname} {lastname} {email} {roleid}', fu
     $password = $this->secret('Password: ');
 
     dump($repository->createUser([
-        'account' => $this->argument('email'),
+        'account' => 'admin',
         'username' => $this->argument('email'),
         'email' => $this->argument('email'),
         'firstname' => $this->argument('firstname'),
